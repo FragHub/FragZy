@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
 
-namespace MatchZy;
-public class MatchZyEvent
+namespace FragBot3;
+public class FragBot3Event
 {
-    public MatchZyEvent(string eventName)
+    public FragBot3Event(string eventName)
     {
         EventName = eventName;
     }
@@ -12,114 +12,114 @@ public class MatchZyEvent
     public string EventName { get; }
 }
 
-public class MatchZyMatchEvent : MatchZyEvent
+public class FragBot3MatchEvent : FragBot3Event
 {
     [JsonPropertyName("matchid")]
     public required long MatchId { get; init; }
 
-    protected MatchZyMatchEvent(string eventName) : base(eventName)
+    protected FragBot3MatchEvent(string eventName) : base(eventName)
     {
     }
 }
 
-public class MatchZyMatchTeamEvent : MatchZyMatchEvent
+public class FragBot3MatchTeamEvent : FragBot3MatchEvent
 {
     [JsonPropertyName("team")]
     public required string Team { get; init; }
 
-    protected MatchZyMatchTeamEvent(string eventName) : base(eventName)
+    protected FragBot3MatchTeamEvent(string eventName) : base(eventName)
     {
     }
 }
 
-public class MatchZyMapEvent : MatchZyMatchEvent
+public class FragBot3MapEvent : FragBot3MatchEvent
 {
     [JsonPropertyName("map_number")]
     public required int MapNumber { get; init; }
 
-    protected MatchZyMapEvent(string eventName) : base(eventName)
+    protected FragBot3MapEvent(string eventName) : base(eventName)
     {
     }
 }
 
-public class MatchZyMapTeamEvent : MatchZyMapEvent
+public class FragBot3MapTeamEvent : FragBot3MapEvent
 {
     [JsonPropertyName("team_int")]
     public required int TeamNumber { get; init; }
 
-    protected MatchZyMapTeamEvent(string eventName) : base(eventName)
+    protected FragBot3MapTeamEvent(string eventName) : base(eventName)
     {
     }
 }
 
-public class MatchZyRoundEvent : MatchZyMapEvent
+public class FragBot3RoundEvent : FragBot3MapEvent
 {
     [JsonPropertyName("round_number")]
     public required int RoundNumber { get; init; }
 
-    protected MatchZyRoundEvent(string eventName) : base(eventName)
+    protected FragBot3RoundEvent(string eventName) : base(eventName)
     {
     }
 }
 
-public class MatchZyTimedRoundEvent : MatchZyRoundEvent
+public class FragBot3TimedRoundEvent : FragBot3RoundEvent
 {
     [JsonPropertyName("round_time")]
     public required int RoundTime { get; init; }
 
-    protected MatchZyTimedRoundEvent(string eventName) : base(eventName)
+    protected FragBot3TimedRoundEvent(string eventName) : base(eventName)
     {
     }
 }
 
-public class MatchZyPlayerRoundEvent : MatchZyRoundEvent
+public class FragBot3PlayerRoundEvent : FragBot3RoundEvent
 {
 
     [JsonPropertyName("player")]
     public required int Player { get; init; }
 
-    protected MatchZyPlayerRoundEvent(string eventName) : base(eventName)
+    protected FragBot3PlayerRoundEvent(string eventName) : base(eventName)
     {
     }
 }
 
-public class MatchZyPlayerTimedRoundEvent : MatchZyTimedRoundEvent
+public class FragBot3PlayerTimedRoundEvent : FragBot3TimedRoundEvent
 {
     [JsonPropertyName("player")]
     public required int Player { get; init; }
 
-    protected MatchZyPlayerTimedRoundEvent(string eventName) : base(eventName)
+    protected FragBot3PlayerTimedRoundEvent(string eventName) : base(eventName)
     {
     }
 }
 
-public class MatchZyPlayerDisconnectedEvent : MatchZyMatchEvent
+public class FragBot3PlayerDisconnectedEvent : FragBot3MatchEvent
 {
     [JsonPropertyName("player")]
     public required int Player { get; init; }
 
-    public MatchZyPlayerDisconnectedEvent() : base("player_disconnect")
+    public FragBot3PlayerDisconnectedEvent() : base("player_disconnect")
     {
     }
 }
 
-public class MatchZySeriesStartedEvent : MatchZyMatchEvent
+public class FragBot3SeriesStartedEvent : FragBot3MatchEvent
 {
     [JsonPropertyName("team1")]
-    public required MatchZyTeamWrapper Team1 { get; init; }
+    public required FragBot3TeamWrapper Team1 { get; init; }
 
     [JsonPropertyName("team2")]
-    public required MatchZyTeamWrapper Team2 { get; init; }
+    public required FragBot3TeamWrapper Team2 { get; init; }
 
     [JsonPropertyName("num_maps")]
     public required int NumberOfMaps { get; init; }
 
-    public MatchZySeriesStartedEvent() : base("series_start")
+    public FragBot3SeriesStartedEvent() : base("series_start")
     {
     }
 }
 
-public class MatchZySeriesResultEvent : MatchZyMatchEvent
+public class FragBot3SeriesResultEvent : FragBot3MatchEvent
 {
     [JsonPropertyName("time_until_restore")]
     public required int TimeUntilRestore { get; init; }
@@ -133,19 +133,19 @@ public class MatchZySeriesResultEvent : MatchZyMatchEvent
     [JsonPropertyName("team2_series_score")]
     public required int Team2SeriesScore { get; init; }
 
-    public MatchZySeriesResultEvent() : base("series_end")
+    public FragBot3SeriesResultEvent() : base("series_end")
     {
     }
 }
 
-public class GoingLiveEvent : MatchZyMapEvent
+public class GoingLiveEvent : FragBot3MapEvent
 {
     public GoingLiveEvent() : base("going_live")
     {
     }
 }
 
-public class MatchZyRoundEndedEvent : MatchZyTimedRoundEvent
+public class FragBot3RoundEndedEvent : FragBot3TimedRoundEvent
 {
 
     [JsonPropertyName("reason")]
@@ -155,60 +155,60 @@ public class MatchZyRoundEndedEvent : MatchZyTimedRoundEvent
     public required Winner Winner { get; init; }
 
     [JsonPropertyName("team1")]
-    public required MatchZyStatsTeam StatsTeam1 { get; init; }
+    public required FragBot3StatsTeam StatsTeam1 { get; init; }
 
     [JsonPropertyName("team2")]
-    public required MatchZyStatsTeam StatsTeam2 { get; init; }
+    public required FragBot3StatsTeam StatsTeam2 { get; init; }
 
-    public MatchZyRoundEndedEvent() : base("round_end")
+    public FragBot3RoundEndedEvent() : base("round_end")
     {
     }
 }
 
-public class MapResultEvent : MatchZyMapEvent
+public class MapResultEvent : FragBot3MapEvent
 {
     [JsonPropertyName("winner")]
     public required Winner Winner { get; init; }
 
     [JsonPropertyName("team1")]
-    public required MatchZyStatsTeam StatsTeam1 { get; init; }
+    public required FragBot3StatsTeam StatsTeam1 { get; init; }
 
     [JsonPropertyName("team2")]
-    public required MatchZyStatsTeam StatsTeam2 { get; init; }
+    public required FragBot3StatsTeam StatsTeam2 { get; init; }
 
     public MapResultEvent() : base("map_result")
     {
     }
 }
 
-public class MatchZyMapSelectionEvent : MatchZyMatchTeamEvent
+public class FragBot3MapSelectionEvent : FragBot3MatchTeamEvent
 {
     [JsonPropertyName("map_name")]
     public required string MapName { get; init; }
 
-    protected MatchZyMapSelectionEvent(string eventName) : base(eventName)
+    protected FragBot3MapSelectionEvent(string eventName) : base(eventName)
     {
     }
 }
 
-public class MatchZyMapPickedEvent : MatchZyMapSelectionEvent
+public class FragBot3MapPickedEvent : FragBot3MapSelectionEvent
 {
     [JsonPropertyName("map_number")]
     public required int MapNumber { get; init; }
 
-    public MatchZyMapPickedEvent() : base("map_picked")
+    public FragBot3MapPickedEvent() : base("map_picked")
     {
     }
 }
 
-public class MatchZyMapVetoedEvent : MatchZyMapSelectionEvent
+public class FragBot3MapVetoedEvent : FragBot3MapSelectionEvent
 {
-    public MatchZyMapVetoedEvent() : base("map_vetoed")
+    public FragBot3MapVetoedEvent() : base("map_vetoed")
     {
     }
 }
 
-public class MatchZySidePickedEvent : MatchZyMapSelectionEvent
+public class FragBot3SidePickedEvent : FragBot3MapSelectionEvent
 {
     [JsonPropertyName("map_number")]
     public required int MapNumber { get; init; }
@@ -216,12 +216,12 @@ public class MatchZySidePickedEvent : MatchZyMapSelectionEvent
     [JsonPropertyName("side")]
     public required string Side { get; init; }
 
-    public MatchZySidePickedEvent() : base("side_picked")
+    public FragBot3SidePickedEvent() : base("side_picked")
     {
     }
 }
 
-public class MatchZyDemoUploadedEvent : MatchZyMatchEvent
+public class FragBot3DemoUploadedEvent : FragBot3MatchEvent
 {
     [JsonPropertyName("map_number")]
     public required int MapNumber { get; init; }
@@ -232,7 +232,7 @@ public class MatchZyDemoUploadedEvent : MatchZyMatchEvent
     [JsonPropertyName("success")]
     public bool Success { get; set; }
 
-    public MatchZyDemoUploadedEvent() : base("demo_upload_ended")
+    public FragBot3DemoUploadedEvent() : base("demo_upload_ended")
     {
     }
 }

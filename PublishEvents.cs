@@ -2,11 +2,11 @@ using System.Text;
 using System.Text.Json;
 
 
-namespace MatchZy
+namespace FragBot3
 {
-    public partial class MatchZy
+    public partial class FragBot3
     {
-        public async Task SendEventAsync(MatchZyEvent @event)
+        public async Task SendEventAsync(FragBot3Event @event)
         {
             try
             {

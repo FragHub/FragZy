@@ -4,12 +4,12 @@ using CounterStrikeSharp.API.Core.Attributes.Registration;
 using CounterStrikeSharp.API.Modules.Commands;
 
 
-namespace MatchZy
+namespace FragBot3
 {
 
-    public partial class MatchZy
+    public partial class FragBot3
     {
-        public const string sleepCfgPath = "MatchZy/sleep.cfg";
+        public const string sleepCfgPath = "FragBot3/sleep.cfg";
 
         public void StartSleepMode()
         {
@@ -36,7 +36,7 @@ namespace MatchZy
                 ExecUnpracCommands();
                 Server.ExecuteCommand("""exec gamemode_competitive.cfg;""");
             }
-            Log($"[StartSleepMode] MatchZy deactivated!");
+            Log($"[StartSleepMode] FragBot3 deactivated!");
         }
 
         [ConsoleCommand("css_sleep", "Starts sleep mode")]
@@ -51,7 +51,7 @@ namespace MatchZy
             if (matchStarted)
             {
                 // ReplyToUserCommand(player, "Sleep Mode cannot be started when a match has been started!");
-                ReplyToUserCommand(player, Localizer["matchzy.sleep.sleepwhenmatchstared"]);
+                ReplyToUserCommand(player, Localizer["fragbot3.sleep.sleepwhenmatchstared"]);
                 return;
             }
             StartSleepMode();

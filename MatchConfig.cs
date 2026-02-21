@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Newtonsoft.Json.Linq;
 
 
-namespace MatchZy
+namespace FragBot3
 {
 
     public class MatchConfig

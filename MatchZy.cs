@@ -4,22 +4,23 @@ using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Utils;
 using CounterStrikeSharp.API.Core.Attributes;
 using CounterStrikeSharp.API.Modules.Timers;
+using CounterStrikeSharp.API.Modules.Events;
 
 
-namespace MatchZy
+namespace FragBot3
 {
-    [MinimumApiVersion(227)]
-    public partial class MatchZy : BasePlugin
+    [MinimumApiVersion(362)]
+    public partial class FragBot3 : BasePlugin
     {
 
-        public override string ModuleName => "MatchZy";
-        public override string ModuleVersion => "0.8.8";
+        public override string ModuleName => "FragBot 3";
+        public override string ModuleVersion => "3.0.0";
 
-        public override string ModuleAuthor => "WD- (https://github.com/shobhit-pathak/)";
+        public override string ModuleAuthor => "sphaxa";
 
-        public override string ModuleDescription => "A plugin for running and managing CS2 practice/pugs/scrims/matches!";
+        public override string ModuleDescription => "FRAG tournament plugin";
 
-        public string chatPrefix = $"[{ChatColors.Green}MatchZy{ChatColors.Default}]";
+        public string chatPrefix = $"   {ChatColors.Red}FRAG {ChatColors.Blue}\u2756{ChatColors.Default}";
         public string adminChatPrefix = $"[{ChatColors.Red}ADMIN{ChatColors.Default}]";
 
         // Plugin start phase data
@@ -64,7 +65,7 @@ namespace MatchZy
         public CounterStrikeSharp.API.Modules.Timers.Timer? pausedStateTimer = null;
 
         // Each message is kept in chat display for ~13 seconds, hence setting default chat timer to 13 seconds.
-        // Configurable using matchzy_chat_messages_timer_delay <seconds>
+        // Configurable using fragbot3_chat_messages_timer_delay <seconds>
         public int chatTimerDelay = 13;
 
         // Game Config
@@ -90,12 +91,12 @@ namespace MatchZy
             database.InitializeDatabase(ModuleDirectory);
 
             // This sets default config ConVars
-            Server.ExecuteCommand("execifexists MatchZy/config.cfg");
+            Server.ExecuteCommand("execifexists FragBot3/config.cfg");
 
-            teamSides[matchzyTeam1] = "CT";
-            teamSides[matchzyTeam2] = "TERRORIST";
-            reverseTeamSides["CT"] = matchzyTeam1;
-            reverseTeamSides["TERRORIST"] = matchzyTeam2;
+            teamSides[fragbot3Team1] = "CT";
+            teamSides[fragbot3Team2] = "TERRORIST";
+            reverseTeamSides["CT"] = fragbot3Team1;
+            reverseTeamSides["TERRORIST"] = fragbot3Team2;
 
             if (!hotReload) {
                 AutoStart();
@@ -219,7 +220,7 @@ namespace MatchZy
                 CCSPlayerController? player = @event.Userid;
                 if (!IsPlayerValid(player)) return HookResult.Continue;
 
-                if (matchzyTeam1.coach.Contains(player!) || matchzyTeam2.coach.Contains(player!)) {
+                if (fragbot3Team1.coach.Contains(player!) || fragbot3Team2.coach.Contains(player!)) {
                     @event.Silent = true;
                     return HookResult.Changed;
                 }
@@ -343,7 +344,7 @@ namespace MatchZy
                 {
                     int damage = @event.DmgHealth;
                     int postDamageHealth = @event.Health;
-                    PrintToPlayerChat(attacker!, Localizer["matchzy.pracc.damage", damage, victim.PlayerName, postDamageHealth]);
+                    PrintToPlayerChat(attacker!, Localizer["fragbot3.pracc.damage", damage, victim.PlayerName, postDamageHealth]);
                     return HookResult.Continue;
                 }
 
@@ -412,7 +413,7 @@ namespace MatchZy
                         else
                         {
                             // ReplyToUserCommand(player, "Usage: .asay <message>");
-                            ReplyToUserCommand(player, Localizer["matchzy.cc.usage", ".asay <message>"]);
+                            ReplyToUserCommand(player, Localizer["fragbot3.cc.usage", ".asay <message>"]);
                         }
                     }
                     else
@@ -519,7 +520,7 @@ namespace MatchZy
                 if (attacker!.IsValid)
                 {
                     double roundedBlindDuration = Math.Round(@event.BlindDuration, 2);
-                    PrintToPlayerChat(attacker, Localizer["matchzy.pracc.blind", player!.PlayerName, roundedBlindDuration]);
+                    PrintToPlayerChat(attacker, Localizer["fragbot3.pracc.blind", player!.PlayerName, roundedBlindDuration]);
                 }
                 var userId = player!.UserId;
                 if (userId != null && noFlashList.Contains((int)userId))
@@ -536,7 +537,7 @@ namespace MatchZy
             RegisterEventHandler<EventMolotovDetonate>(EventMolotovDetonateHandler);
             RegisterEventHandler<EventDecoyDetonate>(EventDecoyDetonateHandler);
 
-            Console.WriteLine($"[{ModuleName} {ModuleVersion} LOADED] MatchZy by WD- (https://github.com/shobhit-pathak/)");
+            Console.WriteLine($"[{ModuleName} {ModuleVersion} LOADED] FragBot 3");
         }
     }
 }

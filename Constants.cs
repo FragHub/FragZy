@@ -1,4 +1,4 @@
-namespace MatchZy;
+namespace FragBot3;
 
 class Constants
 {
